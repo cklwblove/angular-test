@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Examples</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="stylesheet" href="http://static.7fgame.com/global/css/global.css">
+</head>
+
+<body>
+
+ <div ng-controller="MyController">
+     <h1>Hello {{ clock }}!</h1>
+ </div>
+
+ <div ng-controller="FirstController">
+     <h4>The simplest adding machine ever</h4>
+     <button ng-click="add(1)" class="button">Add</button>
+     <a ng-click="subtract(1)" class="button alert">Subtract</a>
+     <h4>Current count: {{ counter }}</h4>
+ </div>
+<script src="lib/js/angular.min.js"></script>
+ <script>
+     var app = angular.module('myApp', []);
+//     创建一个模块
+     app.controller('MyController', function ($scope) {
+         console.log(new Date())
+         $scope.clock = {
+             now: new Date()
+         };
+         var updateClock = function() {
+             $scope.clock.now = new Date();
+         };
+         setInterval(function() {
+             $scope.$apply(updateClock);
+         });
+         updateClock();
+
+     });
+
+     app.controller('FirstController', function($scope) {
+         $scope.counter = 0;
+         $scope.add = function(amount) {
+             $scope.counter += amount;
+         }
+         $scope.subtract = function(amount) {
+             $scope.counter -= amount;
+         }
+
+     });
+
+ </script>
+</body>
+</html>

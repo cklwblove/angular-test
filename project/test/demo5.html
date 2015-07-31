@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN" ng-app="myApp">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title></title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="http://static.7fgame.com/global/css/global.css">
+
+</head>
+
+<body>
+
+<div ng-controller="MyController">
+    <input ng-model="expr"
+           type="text"
+           placeholder="Enter an expression" />
+    <h2>{{ parseValue }}</h2>
+</div>
+
+<p>{{ 123.456789 | number:2 }}</p>
+<p>{{3545 | currency}}</p>
+<p>今天{{1423130269432 | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+<script src="lib/js/angular.min.js"></script>
+<script>
+
+    var app = angular.module("myApp", []);
+    app.controller('MyController', function($scope, $parse) {
+        $scope.$watch('expr', function(newVal, oldVal, scope) {
+            if(newVal != oldVal) {
+                var parseFun = $parse(newVal);
+                $scope.parseValue = parseFun(scope);
+            }
+
+        })
+
+    });
+
+
+</script>
+</body>
+</html>
