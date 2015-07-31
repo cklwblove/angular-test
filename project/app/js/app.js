@@ -13,8 +13,25 @@
 
 var phonecatApp = angular.module('phonecatApp', [
 
+    'ngRoute',
+    'phonecatControllers',
     // filters
     'businessEnFilters',
     'companyStatusFilters'
 ]);
 
+phonecatApp.config(['$routeProvider', function($routeProvider) {
+    $routeProvider.
+        when('/phones', {
+            templateUrl: 'partials/phone-list.html',
+            controller: 'phoneListCtroller'
+        }).
+        when('/phones/:phoneId', {
+            templateUrl: 'partials/phone-detail.html',
+            controller: 'phoneDetailCtroller'
+        }).
+        otherwise({
+            redirectTo: '/phones';
+        });
+
+}]);

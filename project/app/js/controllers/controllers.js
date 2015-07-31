@@ -9,7 +9,9 @@
 
 /* Controllers */
 
-phonecatApp.controller('PhoneListCtrl', function($scope, $http) {
+var phonecatControllers = angular.module('phonecatControllers', []);
+
+phonecatControllers.controller('phoneListController', function($scope, $http) {
     //$scope.phones = [
     //    {'name': 'Nexus S',
     //        'snippet': 'Fast just got faster with Nexus S.'},
@@ -25,7 +27,7 @@ phonecatApp.controller('PhoneListCtrl', function($scope, $http) {
     $scope.orderProp = 'age';
 });
 
-phonecatApp.controller('getAllCompany', ['$scope', '$http', function($scope, $http) {
+phonecatControllers.controller('getAllCompanyController', ['$scope', '$http', function($scope, $http) {
     //loadAjax('https://open.hs.net/iuc/v1/iuchttpservice/services/allcompany_get', "", "get", function(d) {
     //    companies = d.data;
     //}, false);
