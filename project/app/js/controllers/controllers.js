@@ -5,35 +5,40 @@
  * @version $
  */
 
-'use strict';
-
 /* Controllers */
 
-var phonecatControllers = angular.module('phonecatControllers', []);
+(function () {
 
-phonecatControllers.controller('phoneListController', function($scope, $http) {
-    //$scope.phones = [
-    //    {'name': 'Nexus S',
-    //        'snippet': 'Fast just got faster with Nexus S.'},
-    //    {'name': 'Motorola XOOM™ with Wi-Fi',
-    //        'snippet': 'The Next, Next Generation tablet.'},
-    //    {'name': 'MOTOROLA XOOM™',
-    //        'snippet': 'The Next, Next Generation tablet.'}
-    //];
-    $http.get('data/phones.json').success(function(d) {
-        $scope.phones = d;
-    });
+    'use strict';
 
-    $scope.orderProp = 'age';
-});
+    var phonecatControllers = angular.module('phonecatControllers', []);
 
-phonecatControllers.controller('getAllCompanyController', ['$scope', '$http', function($scope, $http) {
-    //loadAjax('https://open.hs.net/iuc/v1/iuchttpservice/services/allcompany_get', "", "get", function(d) {
-    //    companies = d.data;
-    //}, false);
-    $http.get('https://open.hs.net/iuc/v1/iuchttpservice/services/allcompany_get').success(function(d) {
-        $scope.companies = d.data;
-    });
+    phonecatControllers.controller('phoneListController', ['$scope', 'Phone', function($scope, Phone) {
+        $scope.phones = Phone.query();
+        $scope.orderProp = 'age';
+    }]);
+
+    phonecatControllers.controller('phoneDetailController', ['$scope', '$routeParams', 'Phone', function($scope, $routeParams, Phone) {
+        $scope.phone = Phone.get({phoneId: $routeParams.phoneId}, function(phone) {
+            $scope.mainImageUrl = phone.images[0];
+        });
+
+        $scope.setImage = function(imageUrl) {
+            console.log('setImage');
+            $scope.mainImageUrl = imageUrl;
+        }
+    }]);
 
 
-}]);
+    phonecatControllers.controller('getAllCompanyController', ['$scope', '$http', function($scope, $http) {
+        //loadAjax('https://open.hs.net/iuc/v1/iuchttpservice/services/allcompany_get', "", "get", function(d) {
+        //    companies = d.data;
+        //}, false);
+        $http.get('https://open.hs.net/iuc/v1/iuchttpservice/services/allcompany_get').success(function(d) {
+            $scope.companies = d.data;
+        });
+
+        //$scope.orderProp = 'company_id';
+    }]);
+
+})();
