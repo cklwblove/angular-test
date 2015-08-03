@@ -30,15 +30,14 @@
     }]);
 
 
-    phonecatControllers.controller('getAllCompanyController', ['$scope', '$http', function($scope, $http) {
-        //loadAjax('https://open.hs.net/iuc/v1/iuchttpservice/services/allcompany_get', "", "get", function(d) {
-        //    companies = d.data;
-        //}, false);
-        $http.get('https://open.hs.net/iuc/v1/iuchttpservice/services/allcompany_get').success(function(d) {
-            $scope.companies = d.data;
-        });
+    phonecatControllers.controller('getAllCompanyController', ['$scope', 'Company', function($scope, Company) {
+          console.log(Company.query())
+        $scope.companies = Company.query();
+        //$http.get('https://open.hs.net/iuc/v1/iuchttpservice/services/allcompany_get').success(function(d) {
+        //    $scope.companies = d.data;
+        //});
 
-        //$scope.orderProp = 'company_id';
+        $scope.orderProp = 'company_id';
     }]);
 
 })();

@@ -30,5 +30,11 @@
                 query: {method:'GET', params:{phoneId:'phones'}, isArray:true}
             });
         }]);
+
+    phonecatServices.factory('Company', ['$resource', function($resource) {
+        return $resource('https://open.hs.net/iuc/v1/iuchttpservice/services/allcompany_get', {}, {
+            query: {method: 'get'}
+        });
+    }]);
 })();
 
