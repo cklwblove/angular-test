@@ -24,18 +24,16 @@
         });
 
         $scope.setImage = function(imageUrl) {
-            console.log('setImage');
             $scope.mainImageUrl = imageUrl;
         }
     }]);
 
 
     phonecatControllers.controller('getAllCompanyController', ['$scope', 'Company', function($scope, Company) {
-          console.log(Company.query())
-        $scope.companies = Company.query();
-        //$http.get('https://open.hs.net/iuc/v1/iuchttpservice/services/allcompany_get').success(function(d) {
-        //    $scope.companies = d.data;
-        //});
+
+        Company.get(function(company) {
+            $scope.companies = company.data;
+        });
 
         $scope.orderProp = 'company_id';
     }]);
