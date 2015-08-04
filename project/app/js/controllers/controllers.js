@@ -15,6 +15,7 @@
 
     phonecatControllers.controller('phoneListController', ['$scope', 'Phone', function($scope, Phone) {
         $scope.phones = Phone.query();
+        console.log($scope.phones);
         $scope.orderProp = 'age';
     }]);
 
@@ -30,7 +31,7 @@
 
 
     phonecatControllers.controller('getAllCompanyController', ['$scope', 'Company', function($scope, Company) {
-
+        //console.log(Company.query());
         Company.get(function(company) {
             $scope.companies = company.data;
         });
